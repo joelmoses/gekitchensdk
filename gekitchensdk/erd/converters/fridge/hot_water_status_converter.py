@@ -11,6 +11,7 @@ class HotWaterStatusConverter(ErdReadOnlyConverter[HotWaterStatus]):
             return HotWaterStatus(
                 status=ErdHotWaterStatus.NA,
                 time_until_ready=None,
+                time_remaining=None,
                 current_temp=None,
                 tank_full=ErdFullNotFull.NA,
                 brew_module=ErdPresent.NA,
@@ -22,6 +23,7 @@ class HotWaterStatusConverter(ErdReadOnlyConverter[HotWaterStatus]):
             status = ErdHotWaterStatus.NA
 
         time_until_ready = timedelta(minutes=erd_decode_int(value[2:6]))
+        time_remaining = timedelta(minutes=erd_decode_int(value[2:6]))
         current_temp = erd_decode_int(value[6:8])
 
         try:
@@ -42,6 +44,7 @@ class HotWaterStatusConverter(ErdReadOnlyConverter[HotWaterStatus]):
         return HotWaterStatus(
             status=status,
             time_until_ready=time_until_ready,
+            time_remaining=time_remaining,
             current_temp=current_temp,
             tank_full=tank_full,
             brew_module=brew_module,
