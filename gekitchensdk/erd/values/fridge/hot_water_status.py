@@ -8,6 +8,7 @@ from .erd_pod_status import ErdPodStatus
 class HotWaterStatus(NamedTuple):
     status: ErdHotWaterStatus
     time_until_ready: Optional[timedelta]
+    time_remaining: Optional[timedelta]
     current_temp: Optional[int]
     tank_full: ErdFullNotFull
     brew_module: ErdPresent
